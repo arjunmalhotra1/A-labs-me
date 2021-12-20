@@ -1,0 +1,4 @@
+/*
+	How to decouple our code from change. Change we are talking about are the data changes.
+	We will understand how to use interfaces and the cost behind them.
+*/
