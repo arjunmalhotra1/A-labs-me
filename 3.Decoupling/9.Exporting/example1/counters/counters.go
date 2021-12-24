@@ -1,6 +1,6 @@
 // Package counters provides alert counter support.
 /*
-	HEre we name the package after the folder name. It is a good convention to follow
+	Here we name the package after the folder name. It is a good convention to follow
 */
 package counters
 
