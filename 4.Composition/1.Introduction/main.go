@@ -1,0 +1,4 @@
+/*
+	Composition is what allows us to be able to write code that can decouple itself from the change but
+	compose over time so we can improve and extend all the things we are doing.
+*/
