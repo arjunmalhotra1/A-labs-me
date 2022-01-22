@@ -1,0 +1,5 @@
+/*
+	In this lesson we will begin using some go toolings.
+	We will focus first on benchmarking.
+	We will see different kinds of bench marks and how the benchmark tooling works.
+*/

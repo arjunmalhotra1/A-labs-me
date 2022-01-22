@@ -5,7 +5,7 @@
 
 	Idea of drop pattern:
 	Imagine you are writing a DNS server, the chance of the DNS server getting attacked is all day long.
-	Idea of DNS attack is to flood our DNS server with requests. Somany requests that when we try to handle them
+	Idea of DNS attack is to flood our DNS server with requests. So many requests that when we try to handle them
 	our server implodes.
 	What we need to do to defend ourselves is that we need to be realistic and realize that we can't handle
 	every request and that we have to know what our capacity is.
