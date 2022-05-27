@@ -34,7 +34,7 @@
 	}
 
 	Mock server will help us set up a server that we can run our mocks against.
-	So we are not hitting the liver server we are hitting this server.
+	So we are not hitting the live server we are hitting this server.
 	"mockServer()" returns a pointer to the "*httptest.Server"
 	We are actually going to run a server on localhost on some port.
 	and what we will do is intercept those get calls nad then return the mock data back out.
@@ -91,14 +91,6 @@
 	the test and the correctness of unit under test"
 	When we are mocking something, we are still mockign it. It's not like hitting the live system.
 	Mocks are valueable specially for validating the error cases that the live system probably aren't producing.
-
-
-
-
-
-
-
-
 
 
 */

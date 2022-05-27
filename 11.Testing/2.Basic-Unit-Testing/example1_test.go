@@ -110,16 +110,6 @@
 	then he made some edits and forced the test to fail. See example_2.go.
 
 
-
-
-
-
-
-
-
-
-
-
 */
 
 // Sample test to show how to write a basic unit test.

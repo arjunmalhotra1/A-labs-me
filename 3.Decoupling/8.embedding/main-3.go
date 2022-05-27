@@ -83,7 +83,7 @@ func sendNotification(n notifier) {
 }
 
 /*
-	As long as there are no ambiguity the compiler will not care about these multiple implementation.
+	As long as there are no ambiguity the compiler will not care about these multiple implementations.
 	Promotion doesn't happen automatically, promotion only happens when we try to access something
 	via that promotion.
 
@@ -100,7 +100,7 @@ func sendNotification(n notifier) {
 	which one to use. Do I use user or customer.
 	In this case since "admin" has overwritten anyway, we wouldn't really have any ambiguity or any issues.
 
-	But in a code review if Bill saw this idea of multiple Embeddings the code review would stop as
+	But in a code review if Bill saw this idea of "multiple Embeddings"- user and customer the code review would stop as
 	this is not a good design pattern that we would be using in Go.
 	Inner types can have inner types that can have inner types.
 	Then also code reviews would stop as these are not the patterns we would want to use in Go.

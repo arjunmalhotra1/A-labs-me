@@ -8,10 +8,10 @@ type user struct {
 }
 
 func main() {
-	// In go we do not have constructors but we have 'factory fucntions'.
+	// In go we do not have constructors but we have 'factory functions'.
 	// Factory functions can construct a value, initialize it for property use, and then return it back to the caller.
-	// Here we have 2 versions of the create user factory fucntions.
-	// One of the first things we look for in a factory fucntion is the return type.
+	// Here we have 2 versions of the create user factory functions.
+	// One of the first things we look for in a factory function is the return type.
 	// Return is going to tell us a lot about the data semantics.
 	u1 := createUserV1()
 	u2 := createUserV2()
@@ -21,7 +21,7 @@ func main() {
 
 // createUserV1 creates a user value and returns
 // a copy back to the caller(own copy of the caller).
-// This is a value semantics fucntion.
+// This is a value semantics function.
 func createUserV1() user {
 	u := user{
 		name:  "Bill",
@@ -35,7 +35,7 @@ func createUserV1() user {
 
 // createUserV2 creates a user value and shares
 // the value with the caller. The caller will get the "shared" access to the
-// value of the user this fucntion is constructing.
+// value of the user this function is constructing.
 // This is pointer semantic.
 func createUserV2() *user {
 	u := user{
@@ -48,38 +48,38 @@ func createUserV2() *user {
 	return &u
 }
 
-// Go compiler can perfom, static code analysis.
-// One type of static code analysiss that the compiler performs is called "escape analysis".
+// Go compiler can perform, static code analysis.
+// One type of static code analysis that the compiler performs is called "escape analysis".
 // "escape analysis" is trying to read the code during the compile time and trying to determine,
-// where a value should be constructed in memory. Whether it's ont he stack or on the heap.
+// where a value should be constructed in memory. Whether it's on the stack or on the heap.
 // When a value is constructed on the hep we call it an "escape". All values are constructed just once.
 // "Escape analysis" is not about construction it's about how a value is shared.
 // Construction on lines 41-43 doesn't tell us anything. We still don't know where that value needs to be constructed.
-// Stack or the heap. On line 46 we are sharing hte value down to the print function.
-// On line 48 we wil be "sharing up". Another fucntion call from the main might wipe out this V2's frame.
+// Stack or the heap. On line 46 we are sharing the value down to the print function.
+// On line 48 we will be "sharing up". Another function call from the main might wipe out this V2's frame.
 // With escape analysis if the compiler recognizes code where value is being shared up the call stack, it immediately
 // decides not to construct the value on the stack and it's going to have to be on the heap.
 // Line 48 is going to cause the escape construction on the heap.
 // Now variable "u" is created outside the frame. Only way to access it is through a pointer.
-// "u" represents a value not on the stack but on the heap. Unlike other laguages where it could only have been on the
+// "u" represents a value not on the stack but on the heap. Unlike other languages where it could only have been on the
 // stack.
-// On line 48 when we shrae it with main we are copying the heap address.
+// On line 48 when we share it with main we are copying the heap address.
 // Anything on the heap is the job of the Garbage collector to manage.
 // anything on the stack is self cleaning. Garbage collector will add to the internal latency.
 // Compiler looks at the code and sees how we are sharing (not constructing) and then makes a decision on to
 // have the values constructed on the heap or the stack.
-// Now as soon as we see code like line 48, we can say that's sharing up the call stack we know that
+// Now as soon as we see code like line 48 - return &u, we can say that's sharing up the call stack we know that
 // it's going to be a cost on our software because that's going to create a latency cost in our software with the
 // garbage collector.
-// but if we see just say "return u" this doesn't tell us anything. We cannot say that this is only valuse
-// sematics as the construction could have been done like this:
+// but if we see just say "return u" this doesn't tell us anything. We cannot say that this is only value
+// semantic as the construction could have been done like this:
 
 // 	u := &user{
 //		name:  "Bill",
 //		email: "bill@ardanlabs.com",
 //	}
 
-// We just lost readablility if we do something like above. We no longer know the cose without reading more code.
+// We just lost readability if we do something like above. We no longer know the cost without reading more code.
 
 // GUIDELINES
 // 1. When we do construction to a variable then we will be using value construction. Value construction
@@ -101,6 +101,7 @@ func createUserV2() *user {
 
 /*
 
+$ go build -gcflags -m=2
 // We can use the gc flag, go compiler flag. using -m=2 the compiler will not build but produce the
 // escape analysis report.
 // See escape analysis and inlining decisions.

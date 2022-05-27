@@ -7,9 +7,9 @@ type example struct {
 func main() {
 	var e1 example
 	// One would think that e1 is of size 7 bytes - 1 + 2 + 4
-	// But we would be wrong, we do alignemnts that the compiler has to take care of.
+	// But we would be wrong, we do alignments that the compiler has to take care of.
 	// Hence it is not a 7 byte value.
-	// It is an 8 byte value, because of alignements we get extra one byte.
+	// It is an 8 byte value, because of alignments we get extra one byte.
 
 }
 
@@ -43,7 +43,7 @@ type example struct {
 }  
 
 // We can re arrange the fields to be better optimized but we DO NOT do that.
-// We order the fields in a way for better readability. We do not do this unless meemory is actually a problem.
+// We order the fields in a way for better readability. We do not do this unless memory is actually a problem.
 type example struct {
 	counter int64
 	pi float32

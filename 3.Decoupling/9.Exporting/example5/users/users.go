@@ -19,7 +19,7 @@ package users
 // So he would ask to make the "user" type exported.
 
 // However this is common having exported type fields within the unexported types.
-// This is becasue of marshalling and unmarshalling. Our marshallers & decoders, they require fields
+// This is because of marshalling and unmarshalling. Our marshallers & decoders, they require fields
 // to be exported in order to access them because that's the way reflection to work.
 // We wouldn't want the entire type to be exported because it's still data that should be
 // unexported or internal to the package that is using it.

@@ -64,7 +64,7 @@ func init() {
 }
 
 // LinkedListTraverse traverses the linked list linearly.
-// We wnat to know how ling does it take to traverse this memory chunk.
+// We want to know how ling does it take to traverse this memory chunk.
 func LinkedListTraverse() int {
 	var ctr int
 

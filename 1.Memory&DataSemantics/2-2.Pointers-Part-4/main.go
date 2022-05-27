@@ -1,7 +1,7 @@
 // A drawback of having 2K stack is that no 2 go routines can share a value with another go routine that's on
 // it's stack. So any pointers associated with a stack are going to be internal pointers to that Go routine only.
-// If 2 go routines need to hsare a value, that value has to be on the heap.
-// Value sematics are very powerful they allow the isolation model, they allow mutation to happen in a safe way.
+// If 2 go routines need to share a value, that value has to be on the heap.
+// Value semantics are very powerful they allow the isolation model, they allow mutation to happen in a safe way.
 // We are trying to replicate the picture attached in this folder.
 // We share the string down the call stack 10 times.
 

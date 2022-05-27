@@ -114,6 +114,7 @@ func waitForResult() {
 	ch := make(chan string)
 
 	go func() {
+		// Just to simulate the idea of work the goroutine would be doing.
 		time.Sleep(time.Duration(rand.Intn(500)) * time.Millisecond)
 		ch <- "data"
 		fmt.Println("child : sent signal")

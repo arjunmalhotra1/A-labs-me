@@ -37,7 +37,7 @@ type admin struct {
 
 		This does not make admin a user. We cannot pass around admin values like they are user values.
 
-		Note: This is not Inheritance. There is no subtyping. Admins are Admins and Users are Users.
+		Note: This is not Inheritance. There is no subtyping. Remember Go is strictly typed. Admins are Admins and Users are Users.
 		All we are doing here is, allowing fields and methods associated with user type to promote up to the
 		outer type.
 	*/
@@ -69,4 +69,6 @@ func main() {
 	// We can access fields methods. WE can access the inner type's behavior directly through the
 	// outer type without having to do ad.user.notify()
 	ad.notify()
+
+	// Both produce the same output.
 }
