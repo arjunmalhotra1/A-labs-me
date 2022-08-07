@@ -52,7 +52,7 @@ func createUserV2() *user {
 // One type of static code analysis that the compiler performs is called "escape analysis".
 // "escape analysis" is trying to read the code during the compile time and trying to determine,
 // where a value should be constructed in memory. Whether it's on the stack or on the heap.
-// When a value is constructed on the hep we call it an "escape". All values are constructed just once.
+// When a value is constructed on the heap we call it an "escape". All values are constructed just once.
 // "Escape analysis" is not about construction it's about how a value is shared.
 // Construction on lines 41-43 doesn't tell us anything. We still don't know where that value needs to be constructed.
 // Stack or the heap. On line 46 we are sharing the value down to the print function.

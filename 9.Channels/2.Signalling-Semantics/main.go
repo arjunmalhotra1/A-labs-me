@@ -13,6 +13,7 @@
 	go routine about some event. Sometimes we can signal with data sometime we can't.
 
 	First thing we should think about when it comes to signalling is on the send side.
+	He always like focussing on the send side.
 	Question. Does the go routine performing the send, (remember this is signalling so we say send and receive
 	not read and write), Is the go routine that is signalling performing the send, does that go routine need a guarantee
 	that the signal being send has been received?

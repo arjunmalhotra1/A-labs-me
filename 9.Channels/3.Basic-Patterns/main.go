@@ -20,7 +20,7 @@
  So we have no idea how long this operation win the Go routine is going to take.
 Maybe the go routine is waiting on a system call, waiting on a database or waiting on something.
 
-We are waitign on the go routine on line "p:=<-ch". This is a receive operation.
+We are waiting on the go routine on line "p:=<-ch". This is a receive operation.
 Remember "channel" is a reference type, we will use value semantics to move it around, pointer semantics on reading and
 writing. We are now blocked in a receive.
 Remember this is a channel that gives us guarantees. The send and receive have to come together. Receiver happens

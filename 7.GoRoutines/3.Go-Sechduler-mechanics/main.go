@@ -9,7 +9,7 @@
 	will execute on the hardware. OS is the one responsible for making sure that the OS threads get on the hardware.
 
 	We have one more thing which is the Go routine. Go routine is an application level thread.
-
+  
 	Go routine thread/Application level thread is almost identical to those behaviors that the OS level threads have.
 	The only difference is that the Go routines doesn't have priorities.
 	One of the reasons why GO routines don't have priorities, because we are not dealing with events in our application
@@ -66,7 +66,7 @@
 	There are 2 types of system calls, Asynchronous and Synchronous.
 	There are other types of blocking calls that are going to happen in our software. In multi threaded software
 	the blocking calls could be synchronization and orchestration, Mutexes, Atomic instruction, we also have potentially
-	CGO issues, CGO is the c compiler for Go so that we can call c libraries and there could be cases that
+	C-GO issues, C-GO is the c compiler for Go so that we can call c libraries and there could be cases that
 	we have c functions that could be blocking the "M".
 
 	So we have our 4 classes of events that are occuring at the scheduler that give the scheduler an opportunity.
@@ -81,7 +81,7 @@
 	Network poller job is to handle Asynchronous system calls. We call it a network poller is because the only
 	Asynchronous calls we really work today are the Networking calls.
 	All 3 operating systems have an excellent support for Asynchronous networking.
-	Unfortunately he operating systems instead of windows doesn't have support for file I/O in an asynchronous way.
+	Unfortunately the only operating systems except of windows doesn't have support for file I/O in an asynchronous way.
 
 	So anytime we are doing the file I/Os we are doing the system synchronous calls.
 	Networking will be using the network system calls and the network poller.
@@ -99,7 +99,7 @@
 
 	So now the scheduler can now choose another GO routine from the Local Run Queue for that "P",
 	and we can start getting some more work done.
-	Remember there's a 200 ns conctext switch and it is helping us here because that "M"
+	Remember there's a 200 ns context switch and it is helping us here because that "M"
 	gets to stay busy doing more work.
 
 	Once the network system call is complete, we take that Go routine off of the Network poller and
@@ -185,7 +185,7 @@
 	some work out of the right "P" but there really isn't a lot.
 	Another part of the algorithm says, another place you can look is the "Global Run Queue".
 
-	In this case the left "P" will steal work from the Global Run queue, andwill egt that work going.
+	In this case the left "P" will steal work from the Global Run queue, and will get that work going.
 
 	================================================================================================================
 
@@ -215,7 +215,7 @@
 	We are also going to be bouncing cores because we don't really know which core is idle at a given time.
 
 	So you can see that with this I/O bound workload, we have context switches going from waiting to running,
-	to executing. WE do a little bit of work we passing messages we are moving around.
+	to executing. We do a little bit of work we passing messages we are moving around.
 	We are bouncing off on cores.
 
 	xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -223,7 +223,7 @@
 	Now let' switch around ot he Go scheduler, the 30.png is agoing to remain the same
 	but we are going to add a couple changes.
 	Replacing Ts with Gs to represent the Go routines, G1 and G2.
-	Also let's have sing "P" with a single "M" running on a single hardware thread say Core 1(C1).
+	Also let's have single "P" with a single "M" running on a single hardware thread say Core 1(C1).
 	See  31.png.
 
 	Now when we do all of this on 31.png the only thing that further changes is "What core we are running on."
@@ -237,7 +237,7 @@
 	Because the context switches are happening on the Go thread but not on the hardware.
 	See 34.png
 
-	Sow hat GO has really done has turned the IO bound work into CPU bound work at the OS level.
+	So what GO has really done has turned the IO bound work into CPU bound work at the OS level.
 
 	Context switches are happening at the application level on the thread.
 
@@ -261,7 +261,7 @@
 
 	+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-	even thought we have the scheduler doing lal the wonderful stuff we still have to be sympathetic with the
+	even though we have the scheduler doing lal the wonderful stuff we still have to be sympathetic with the
 	scheduler, in other words we still have to know what our work loads is.
 	More Go routines, then we have "M" for CPU bound workloads are not going to make us get our work done faster
 	because we still have 200 ns that is 2400 instruction losses that we incur if we have context switch.
@@ -272,7 +272,7 @@
 	when it comes to IO bound work, we will have real efficiencies because the context switch is less.
 	Now we will have more go routines than we will have "M"s.
 
-	What's reallybrilliant that the application thread, the Go routine is so light weight that
+	What's really brilliant that the application thread, the Go routine is so light weight that
 	for the first time in our programming model we could build a web server that could throw a Go routines 
 	at every request.
 	That means we could have 50,000 go routines in flight.

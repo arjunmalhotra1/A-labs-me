@@ -1,10 +1,10 @@
 /*
 	NOTE - At places he said milli second but I think he meant micro second.
 	Concurrency - Means out of order execution.
-	The idea that we hae a sequence of executions from begining to the end,
+	The idea that we have a sequence of executions from beginning to the end,
 	but we are going to execute them out of order.
 
-	Paralleleism  - Means we are executing 2 or more instructions at the same time. It's about doing
+	Parallelism  - Means we are executing 2 or more instructions at the same time. It's about doing
 	a lot of work at once.
 
 	Let's start with a very simple hardware where all we have is a single processor.
@@ -26,7 +26,7 @@
 	Hardware thread does the actual execution.
 
 	OS level threads can be in 3 states:
-	1. Runing - When a thread is in a runing state that means we have placed it on the Hardware thread and
+	1. Running - When a thread is in a running state that means we have placed it on the Hardware thread and
 		it is executing it's instructions it's responsible for.
 	2. Runnable - When a thread is in a runnable state it just means that the OS thread wants time on the HW thread.
 		It just has to wait for it's turn.
@@ -43,7 +43,7 @@
 	So how can we create this illusion with our scheduler. One idea is that we will define what we call is the
 	"scheduler's period".
 	Scheduler period is defined as our ability to execute any thread, that is in the runnable state
-	at the begining of this period to get that thread execute withing this time and if we can do that
+	at the beginning of this period to get that thread execute withing this time and if we can do that
 	then at least we can crate this illusion at least within the scope of the scheduler period that everything is
 	running at the same time.
 
@@ -81,7 +81,7 @@
 
 	On average at an operating system level a context switch is going to be 1ms-2ms.
 	That is 1000ns-2000ns. This mean 12,000-24,000 instructions lost. Instructions we could otherwise
-	have been executing but we can't because of conte3xt switch.
+	have been executing but we can't because of context switch.
 
 	say if we have 1000 threads. Now we are talking about micro seconds of time, a thread gets to execute on top of
 	1-2 micro second of context switch.
@@ -111,7 +111,7 @@
 	There are 2 types of work loads that we have to make our early on if we have to
 	make smart engineering decisions with our scheduler.
 
-	1. CPU bound - CPU bound work load isa kind of workload where a thread naturally does not, move into
+	1. CPU bound - CPU bound work load is a kind of workload where a thread naturally does not, move into
 	a waiting state. An example of CPU bound work load will be an algorithm counting integers.
 
 	Say we have 1 millions integers to be added. There's nothing in the process of adding that will cause the threads
@@ -133,12 +133,12 @@
 	get context switched out.
 
 	Context switches are good when it comes to the IO bound workloads. Since the thread will go in the waiting state
-	and will keep the hardware thread idle, we can now levegrage the 12,000 to 24,000 instructions to do the context
-	switc and get another thread up and running.
+	and will keep the hardware thread idle, we can now leverage the 12,000 to 24,000 instructions to do the context
+	switch and get another thread up and running.
 
 	When it comes to CPU bound workloads the context switches are hurting us, because we take
 	12,000 to 24,000 instruction hits for every context switch.
-	And these instructions hits could have been the work we otherwise we could haev been doing.
+	And these instructions hits could have been the work we otherwise we could have been doing.
 
 	Hence understanding the work load is so important.
 
@@ -149,16 +149,16 @@
 	Our OS scheduler has to be a preemptive scheduler. That is it has to handle events.
 	Think about it, the hardware is dealing with events all the time.
 	Just to keep the clock up to date there is an event that is occurring on the machine.
-	And everytime an event occurs on the machine a thread has to respond to it.
+	And every time an event occurs on the machine a thread has to respond to it.
 
-	Part of scheduler also has to create a mapping of hardware events to OS threads and setting hardware system
-	threads to hae a high priority. So even if we are doing CPU bound work load, everytime the clock has to run
+	Part of scheduler also has to create a mapping of hardware events to OS threads and setting certain operating  system
+	threads to have a high priority. So even if we are doing CPU bound work load, everytime the clock has to run
 	we will have to interrupt the workload get the thread to run the clock quickly, do it's thing and pull it off.
 
 	Bill doesn't want the preemptive scheduler that's event based to get in our way of the mental model. But a preemptive
 	scheduler does give to us that, "scheduling is unpredictable".
 	Once all things are equal we never really know what the scheduler is going to do.
-	We have to keep that in our heads when we design code becasue, no matter what we are doing when we haev
+	We have to keep that in our heads when we design code because, no matter what we are doing when we have
 	multi threaded software there has to be a guarantee. It is our job as a developer to have the
 	synchronization adn orchestration. That is putting points of guarantee in the code so that we can guarantee,
 	the algorithms (even if out of order) they do run correctly.
@@ -174,7 +174,7 @@
 	Anytime we need to do anything like this specially in a multi threaded software, the first
 	thing we need to do is to write a sequential version of algorithm(Add function here)
 
-	Sequential version says start from beginign and keep adding nad then we are done.
+	Sequential version says start from beginning and keep adding nad then we are done.
 
 	The next question after writing the sequential version is always going to be
 	Question. "Is this kind of work that can be done concurrently?"
@@ -198,7 +198,7 @@
 	Which means we could only execute 1 OS thread at a given time.
 
 	Say we have 4 sub lists and 4 threads.
-	Question. Will runing this algorithm sequentially be faster or slower than runing it in parallel in 4 threads
+	Question. Will running this algorithm sequentially be faster or slower than runing it in parallel in 4 threads
 	when we have a single hardware thread.
 	Answer. Because this is CPU bound and we can only execute single thread at a time.
 	Running the sequential version is going to be faster.
@@ -248,7 +248,7 @@
 	We know for any CPU bound workload the number of threads we use, equals the number of HW threads we use.
 	Their parallelism is important.
 
-	But in CPU bound work load we don't need parallelism to see improvement with concurrency, because the OS threads
+	But in I/O bound work load we don't need parallelism to see improvement with concurrency, because the OS threads
 	can take turns on the HW threads and the context switches are helping us.
 	Helping us to get more work done over time again we don't know how many.
 
@@ -256,7 +256,7 @@
 	imagine you are building a web service, and you decide to create an operating system thread for every
 	request that came into the server and we have 50,000 requests coming in.
 	This would cause a lot of problems.
-	So we would want to aev a pool of threads, that wwe would post work into and we have to find that magic number.
+	So we would want to have a pool of threads, that wwe would post work into and we have to find that magic number.
 	We have to find the number where, if we use too many threads now the context switches are hurting us.
 	That means we have too many threads in the runnable state, if we have too low of a number they are also
 	now going to perform very well, because now we will have  more idle time on the processor as we will not have
@@ -268,7 +268,7 @@
 	We have to know what state of thread is in and we have to know if our work load is IO bound or CPU bound.
 	CPU bounds work loads mean that the threads don't naturally move into waiting state.
 	Which means we need parallelism to get any throughput with concurrency. I/O bound work loads mean
-	that threads do naturally move into waiting state that means we do not need parallelsim for the conccurency to give
+	that threads do naturally move into waiting state that means we do not need parallelism for the concurrency to give
 	us throughput. The context switches help us get more work done even on a single threaded hardware.
 
 	===============================================================================
