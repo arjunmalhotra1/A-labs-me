@@ -16,7 +16,7 @@
 		"var counter int"
 	is a shared state.
 
-	We will have 2 Go routines tryign to access this shared state.
+	We will have 2 Go routines trying to access this shared state.
 
 	In the loop we create the Go routines see 1.png.
 	The 2 go routines will be each taking a turn and incrementing the shared state.
@@ -56,7 +56,7 @@
 	Go program to now be dirty.
 	We don't have any ability to know that they are dirty.
 
-	So we need to do is have each Go routine take a turn so these 3 operationsa are atomic.
+	So we need to do is have each Go routine take a turn so these 3 operations are atomic.
 	They were atomic before we put the print statement in there.
 
 	But now that hey have added the print statement we are seeing that each go routine is not running

@@ -13,8 +13,7 @@
 	Let's represent that hardware thread as the ability to execute instructions. Every hardware thread we have
 	in our machine gives us the ability to execute instructions.
 	So if we have only one hardware thread then we can only execute one instruction at a time.
-	If we have 2 hardware threads then we can execute 2 instructions at a given time that means execute instructions
-	in parallel.
+	If we have 2 hardware threads then we can execute 2 instructions at a given time that means execute instructions in parallel.
 
 	Say, we have to code an OS. Hence we decide to code a OS level scheduler.
 	For now imagine our hardware is a single hardware threaded. Now we have to in our OS
@@ -30,8 +29,7 @@
 		it is executing it's instructions it's responsible for.
 	2. Runnable - When a thread is in a runnable state it just means that the OS thread wants time on the HW thread.
 		It just has to wait for it's turn.
-	3. Waiting state -  When a thread is in the waiting state we really consider it off the radar. It's gone and it is
-		waiting for something to happen. It could be waiting for something on the network to come back in.
+	3. Waiting state -  When a thread is in the waiting state we really consider it off the radar. It's gone and it is waiting for something to happen. It could be waiting for something on the network to come back in.
 
 	From our OS scheduler's point of view we only care about the threads that are in "Running" state or "Runnable" state.
 	Thread's that are waiting are not in our concern.
@@ -44,7 +42,7 @@
 	"scheduler's period".
 	Scheduler period is defined as our ability to execute any thread, that is in the runnable state
 	at the beginning of this period to get that thread execute withing this time and if we can do that
-	then at least we can crate this illusion at least within the scope of the scheduler period that everything is
+	then at least we can create this illusion at least within the scope of the scheduler period that everything is
 	running at the same time.
 
 	Say Scheduler period (SP) is 100 ms
@@ -54,7 +52,7 @@
 	Say when we start off the scheduler we notice that we have only one thread in the runnable state.
 	so if only have one thread in the runnable state, remember we have only one hardware thread which means
 	only one thread can execute at any given time.
-	thread A gets the full 100 ms to execute it's instrcutions.
+	thread A gets the full 100 ms to execute it's instructions.
 
 	1 nano-second = 12 instructions.(Remember this)
 
@@ -68,25 +66,25 @@
 
 	Say now scheduler period is over and we now have 5 threads in the runnable state.
 	this means we have to cut the time into 5 parts.
-	thread A gets 20 ms, Thread B get's 20 ms and other thread C thread D and thread E get the remaning 60 ms of time.
+	thread A gets 20 ms, Thread B get's 20 ms and other thread C thread D and thread E get the remaining 60 ms of time.
 	See 4.png
-	Everytime more threads show up the time foreach thread gets smaller.
+	Every time more threads show up the time foreach thread gets smaller.
 	If we have 100 thread to run then each thread would get 1 ms of runtime.
 
-	At a somepoint we get diminishing return on the time a given thread gets to do any work.
+	At a some point we get diminishing return on the time a given thread gets to do any work.
 	It's mainly because of the context switch cost.
-	There is some time cost associated with to pullin ght thread out of the hardware. And now Thread B will go
+	There is some time cost associated with to pulling the thread out of the hardware. And now Thread B will go
 	into the hardware.
-	This is going to take some time. This sis context switch. Taking one thread off an putting other thread on.
+	This is going to take some time. This is context switch. Taking one thread off an putting other thread on.
 
-	On average at an operating system level a context switch is going to be 1ms-2ms.
+	On average at an operating system level a context switch is going to be 1 micro second - 2 micro second.
 	That is 1000ns-2000ns. This mean 12,000-24,000 instructions lost. Instructions we could otherwise
 	have been executing but we can't because of context switch.
 
 	say if we have 1000 threads. Now we are talking about micro seconds of time, a thread gets to execute on top of
 	1-2 micro second of context switch.
 
-	What eventually happes is that doing more context switch work than actual work.
+	What eventually happens is that doing more context switch work than actual work.
 	So there is a point where the time slice for each thread, where we do more context switch work than actual work.
 	And we are not really getting any throughput from our machine or our apps.
 
@@ -117,7 +115,7 @@
 	Say we have 1 millions integers to be added. There's nothing in the process of adding that will cause the threads
 	to wait or pause for anything. This is CPU bound work load.
 
-	This means that every thread wil get it's full time slice (from begining till the end). So far we have seen CPU bound
+	This means that every thread wil get it's full time slice (from beginning till the end). So far we have seen CPU bound
 	work load, where if thread A gets on the hardware thread it got it's full time slice and did not switch
 	until the time slice was over.
 	==================================================================================================================
@@ -152,7 +150,7 @@
 	And every time an event occurs on the machine a thread has to respond to it.
 
 	Part of scheduler also has to create a mapping of hardware events to OS threads and setting certain operating  system
-	threads to have a high priority. So even if we are doing CPU bound work load, everytime the clock has to run
+	threads to have a high priority. So even if we are doing CPU bound work load, every time the clock has to run
 	we will have to interrupt the workload get the thread to run the clock quickly, do it's thing and pull it off.
 
 	Bill doesn't want the preemptive scheduler that's event based to get in our way of the mental model. But a preemptive
@@ -172,7 +170,7 @@
 	add all these number and give the value.
 
 	Anytime we need to do anything like this specially in a multi threaded software, the first
-	thing we need to do is to write a sequential version of algorithm(Add function here)
+	thing we need to do is to write a sequential version of algorithm (Add function here)
 
 	Sequential version says start from beginning and keep adding nad then we are done.
 
@@ -198,15 +196,15 @@
 	Which means we could only execute 1 OS thread at a given time.
 
 	Say we have 4 sub lists and 4 threads.
-	Question. Will running this algorithm sequentially be faster or slower than runing it in parallel in 4 threads
+	Question. Will running this algorithm sequentially be faster or slower than running it in parallel in 4 threads
 	when we have a single hardware thread.
 	Answer. Because this is CPU bound and we can only execute single thread at a time.
 	Running the sequential version is going to be faster.
-	Because everytime we have to swap the thread off the hardware, we are taking 12,000 instruction losses.
+	Because every time we have to swap the thread off the hardware, we are taking 12,000 instruction losses.
 	That's only to say we can get his work done within that time slice if we didn't then it's even more time.
 	We could have used these instruction lost to add the integers that we are now not.
 
-	But what if we change our hardare to have 2 hardware thread processes.
+	But what if we change our hardware to have 2 hardware thread processes.
 	Now we can run 2 threads in parallel. Now, we can break the list into say 2 halves and give each thread it's own
 	hardware thread. They can run in parallel.
 	We can get the work done at the same time, then we come up and we get our value.

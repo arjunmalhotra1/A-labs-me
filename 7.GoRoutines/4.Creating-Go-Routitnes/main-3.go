@@ -13,7 +13,7 @@
 	then the Go scheduler can identify that we have this deadlock.
 
 	So if you have go routines in timer loops, which Bill doesn't recommend and tends to avoid
-	timer loops in specially long runing applications. With timer loops you are walking away from the
+	timer loops in specially long running applications. With timer loops you are walking away from the
 	deadlock detection which we wouldn't want to lose it.
 
 	Say we only do Add() for only one Go routine. It's really not predictable what the program is going to do
@@ -21,7 +21,7 @@
 	So if we do wg.Add(1).
 	See 5.png for output on bill's machine.
 	Only uppercase() got to run decremented the waitgroup to 0. The scheduler instead of giving the other Go routine
-	that's had no time, a chance to run. The scheduler went back to the main Go routine that was runing and allowed
+	that's had no time, a chance to run. The scheduler went back to the main Go routine that was running and allowed
 	it to finish the program.
 	Nothing is predictable.
 

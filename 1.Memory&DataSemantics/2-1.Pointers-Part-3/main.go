@@ -106,7 +106,7 @@ $ go build -gcflags -m=2
 // escape analysis report.
 // See escape analysis and inlining decisions.
 // Notice "./example4.go:39:2: u escapes to heap:" Which means that "u" is constructed on the heap
-// becasue of the line " from &u (address-of) at ./example4.go:46:9"
+// because of the line " from &u (address-of) at ./example4.go:46:9"
 // This could be used later on for profiling. As the profiler can show us, "what is allocating".
 // For why, we need these compiler reports.
 // Compiler tells us the decisions so that we do not have to guess about anything in golang.

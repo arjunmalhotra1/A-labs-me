@@ -14,10 +14,10 @@
 	See 7.png for the output and we can see that we have 8 context switches.
 	On the second run see 8.png, 10 context switches.
 
-	Everytime we run the program we see a different number of context switches. And ths' the idea that we can't
+	Every time we run the program we see a different number of context switches. And ths' the idea that we can't
 	// really predict what the output is going to be, because the scheduler truly looks and feel
 	preemptive.
-	Even though it is a cooperative scheduler and we are caling yield() we are still based on events that are
+	Even though it is a cooperative scheduler and we are calling yield() we are still based on events that are
 	occurring may be application level events like the system call to fmt.Println() but they are still
 	based on events so it is very very unpredictable.
 

@@ -3,7 +3,7 @@
 	Orchestration is when there's going to be an interaction between 2 or more Go routines.
 
 	Say you got order coffee and you want to talk to the server behind the register,
-	but you can't because you have people wating in front of you, you have to wait for your turn
+	but you can't because you have people waiting in front of you, you have to wait for your turn
 	that's synchronization problem. There's some shared state.
 	In this case the person behind the register can only talk to one person at a time. So you are stuck in line.
 
@@ -68,7 +68,7 @@
 
 
 	We have 3 go routines associated with this program.
-	1. Main Go routine, created by runtime executingthis whole code,  and
+	1. Main Go routine, created by runtime executing this whole code,  and
 	2. 2 Go routines that we construct ourselves.
 
 	wg.Wait() - We hold the Go routines to wait, what wait is going todo is block the main
@@ -96,7 +96,7 @@
 
 	But,
 	GUARANTEES MATTER. THAT IS WHY WE HAVE "wait()".
-	WE need to guarantee that both functions complete the oreder doesn't amtter and that's why we have the wait().
+	WE need to guarantee that both functions complete the order doesn't matter and that's why we have the wait().
 
 	If we remove - "wg.Wait()" see main-1.go
 

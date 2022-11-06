@@ -4,7 +4,7 @@
 	Remember scheduler is making these calls during those safe points, around the function transitions.
 
 	But Go does give us the option to yield() ourselves but there is no guarantee that things will
-	yield() Ther's no guarantee on order.
+	yield() there's no guarantee on order.
 
 	It's good for testing if we want to create chaos but not good to deal with orchestration and guarantees
 	because there are none.

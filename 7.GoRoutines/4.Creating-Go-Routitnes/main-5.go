@@ -11,11 +11,11 @@
 
 	See 9.png for run results.
 	We will see a mixing of the outputs.
-	Again we will not be able to predict what these outpus will look like because not only now we
+	Again we will not be able to predict what these outputs will look like because not only now we
 	have Go level randomness but we also have hardware level randomness.
 
 	We have two threads executing the system calls, and between the OS and the hardware, we have mix output
-	and we are seeing it runing in parallel.
+	and we are seeing it running in parallel.
 
 	The waitgroup is our first kind of view around orchestration.
 	This helps us create the guarantee point in this case "wg.Wait()".

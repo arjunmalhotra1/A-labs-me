@@ -19,13 +19,13 @@
 	Except for the priorities.
 
 	So far we have seen single threaded Go program, like the Go playground.
-	The Go scheduler is a cooperating scheduler, which means that we need events, that are occuring at the application
+	The Go scheduler is a cooperating scheduler, which means that we need events, that are occurring at the application
 	level to perform scheduling.
 	We have to find the safe points in the code that we can yield the Go routines on and off of "M" in 2.png
 	Till 1.11 the safe points happen during function call transitions.
 	We are waiting for the function call events to occur in Go.
 
-	In 1.12/1.13 to add some preemptive techniques to the scheduler, to make it a little more rnadom. Similar
+	In 1.12/1.13 to add some preemptive techniques to the scheduler, to make it a little more random. Similar
 	to the way the OS works.
 
 	For now, when the video was recorded the Go scheduler, is a cooperative scheduler,
@@ -35,8 +35,7 @@
 
 	========================================================================
 
-	There are 4 events that can occur, with function call transitions that give the scheduler an opportunity
-	to make a context switch.
+	There are 4 classes of events that can occur, with function call transitions that give the scheduler an opportunity to make a context switch.
 
 	We use the keyword "go" anytime we are creating a GO routine.
 	There are 2 more Data structures in 2.png. Every "P" has a "local run queue", LRQ. This is for the Go routines in the
@@ -69,8 +68,8 @@
 	C-GO issues, C-GO is the c compiler for Go so that we can call c libraries and there could be cases that
 	we have c functions that could be blocking the "M".
 
-	So we have our 4 classes of events that are occuring at the scheduler that give the scheduler an opportunity.
-	We shall go a little deeper into 2 systemcall and blocking calls to know how those work.
+	So we have our 4 classes of events that are occurring at the scheduler that give the scheduler an opportunity.
+	We shall go a little deeper into 2 system call and blocking calls to know how those work.
 
 	===========================================================================================================
 
@@ -107,7 +106,7 @@
 	This is a nice workflow because we are efficiently using the threads that we have.
 
 	But what if this recall wasn't a network call but file I/O call?
-	Now we have a little bit of more complications, we can'y use the Network Poller anymore. See 10.png
+	Now we have a little bit of more complications, we can't use the Network Poller anymore. See 10.png
 
 	So what are we going to do? Since the last thing we would want is the Go routine to block the "M".
 	If the go routines makes the read call to open up the file. It's going to take a minimum of
@@ -131,7 +130,7 @@
 	============================================================================================
 
 	When GO was first released (8 years ago) a bulk of third party libraries like
-	Kafka etc weren't there so Go had to rely on C libraries early on in Go  to be able to write programs.
+	Kafka etc weren't there so Go had to rely on C libraries early on in Go to be able to write programs.
 	Since Go manages memory in it's run time, C isn't part of the runtime.
 	So the problem is that as soon as we call into a C function, we are kind of out of our managed state.
 
@@ -143,7 +142,7 @@
 	But it's from some sought of "C" library. See 17.png
 
 	The system monitor is going to see how long it's been since that Go routine has executed an instruction.
-	Say 20 ns be the base time period of inactivity. So essentially is a system monitor, that the go routine,
+	Say for example 20 ns be the base time period of inactivity. So essentially is a system monitor, that the go routine,
 	has been inactive for 20 ns the system monitor will assume that it's blocked and then it will go through the
 	same cycle we saw before.
 	We wil move the "M2" off with the "Go" routine that is making the C call and is blocked.
@@ -159,10 +158,10 @@
 	We have 2 Ps, 2 OS threads (M) and each OS thread, on it's own Hardware thread,a nd the two go  routines
 	G1 and G2 can run in parallel.
 
-	Another interesting thing here when we have got these Ps is that the Go scheuler is also a work
+	Another interesting thing here when we have got these Ps is that the Go scheduler is also a work
 	stealing scheduler.
 
-	Currently we have 2 go routines runing in parallel, we have 3 Go routines in the LRQ in one processor and
+	Currently we have 2 go routines running in parallel, we have 3 Go routines in the LRQ in one processor and
 	1 Go Routines in one LRQ. And say we have 2 Go routines in the Global Run Queue (GRQ), they haven't be
 	assigned to a "P" yet.
 	See 21.png
@@ -179,7 +178,7 @@
 	the Right "P" will steal 2 of the Go routines, put one in the RQ and start executing the
 	other one.
 	The last thing we want is the right "M" to go into the waiting state, because it will be pulled off the hardware,
-	and we will not be able to eecute the GO routines as quickly as we otherwise could.
+	and we will not be able to execute the GO routines as quickly as we otherwise could.
 
 	Now say the left "P" suddenly finishes it's work, see 24.png. Now it has no work to do, may be the left "P" wants to steal
 	some work out of the right "P" but there really isn't a lot.
@@ -189,14 +188,14 @@
 
 	================================================================================================================
 
-	May be this a program runing in C. 26.png
+	May be this a program running in C. 26.png
 	Say we have 2 threads at OS level and they will be passing messages to each other. It's not important that
 	how they'll be doing it but it's important that this is I/O bound work.
 
 	Say T1 is first waiting for some context switch waiting to get in the running state.
 	Then it does a little bit of work, and then sends the message across to T2. See 27.png
 
-	When T1 sends the message across to the other thread, it context switches off and will be in the aiting state.
+	When T1 sends the message across to the other thread, it context switches off and will be in the waiting state.
 	Say T1 was on core 1 and now will be off the core. See 28.png
 
 	On T2 when the message reaches T2, we will have an event, then there will be ctx switch on T2 and T2 will
@@ -208,7 +207,7 @@
 	Now there is an event on T1, T1 goes from waiting to the running state and then will go into the executing sate.
 	And then again some work and then send message to T2.
 
-	Everytime any thread passes a message back and forth, we will have context switches. Say T2 was running on
+	Every time any thread passes a message back and forth, we will have context switches. Say T2 was running on
 	Core 2.
 	And after than T1 ends up being on core 3. See 30.png.
 
@@ -220,19 +219,19 @@
 
 	xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
-	Now let' switch around ot he Go scheduler, the 30.png is agoing to remain the same
+	Now let' switch around ot he Go scheduler, the 30.png is going to remain the same
 	but we are going to add a couple changes.
 	Replacing Ts with Gs to represent the Go routines, G1 and G2.
 	Also let's have single "P" with a single "M" running on a single hardware thread say Core 1(C1).
 	See  31.png.
 
 	Now when we do all of this on 31.png the only thing that further changes is "What core we are running on."
-	Because the only core we'll be runing on is core 1. see22.png
+	Because the only core we'll be running on is core 1. see22.png
 
 	The rest of the diagram stays the same. Because the Go routines have to transition in the same states as
 	the OS threads we saw earlier.
 
-	The only difference is that now instad of these context switches taking 1-2 micro seconds
+	The only difference is that now instead of these context switches taking 1-2 micro seconds
 	(1000 nano seconds - 2000 nano seconds) they are now only taking 200 nano. See 33.png
 	Because the context switches are happening on the Go thread but not on the hardware.
 	See 34.png
@@ -256,12 +255,12 @@
 	maintains a level of CPU bound work loads we can use a lot less threads which could cost us more.
 	Since we are using less the cost is less.
 
-	Since the context switches ost less we have gone from 1000-2000ns to 200 ns.
+	Since the context switches cost less we have gone from 1000-2000ns to 200 ns.
 	Then even the transition between states happen a lot faster.
 
 	+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-	even though we have the scheduler doing lal the wonderful stuff we still have to be sympathetic with the
+	Even though we have the scheduler doing all the wonderful stuff we still have to be sympathetic with the
 	scheduler, in other words we still have to know what our work loads is.
 	More Go routines, then we have "M" for CPU bound workloads are not going to make us get our work done faster
 	because we still have 200 ns that is 2400 instruction losses that we incur if we have context switch.

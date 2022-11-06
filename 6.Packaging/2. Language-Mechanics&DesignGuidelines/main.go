@@ -1,11 +1,11 @@
 /*
-	Every Go developer has to develop on their own, package oriented design.
+	Every Go developer has to develop on their own, "package oriented design."
 	There is no just one way to architect and design your Go projects.
 
 	For bill package orient design means 3 things:
 	1. You have got to be able to identify where a package belongs in your Go projects.
 	2. You have got to be able to define, what a Go project actually is and how it's structured.
-	3. Finally, you have got to be able communicate as a team what clean package design really means.
+	3. Finally, you have got to be able communicate as a steam what clean package design really means.
 	So we got to have a structure, design and a philosophy what a clean package structure is like.
 
 	Here are the base language mechanics for packaging in Go.
