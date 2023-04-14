@@ -1,9 +1,9 @@
 /*
 	Now that we know about the custom error type we can start talking about, "Type as Context".
-	Suddenly the error variabales are no longer working for us.
+	Suddenly the error variables are no longer working for us.
 	There's not enough context in them, now we need our own custom error type.
 
-	Here we take some context from the statnadard library because there are some packages,
+	Here we take some context from the standard library because there are some packages,
 	that use customary type when the default error type is not giving us enough context.
 
 	Here we see "UnmarshalTypeError" this coming form the Json package.
@@ -19,7 +19,7 @@
 
 	Because "UnmarshalTypeError" implements the error interface, "UnmarshalTypeError" can now be used as
 	an error value.
-	Note on line 18 that custom error type implementiona method uses all of the fields in the type.
+	Note on line 18 that custom error type implementing method uses all of the fields in the type.
 	If they are not using all of the fields to log something then Bill would question the field's necessity
 	to provide context.
 
@@ -74,7 +74,7 @@
 	Go has a special way of doing this type as context type of conditional logic.
 	It's with the switch in the main function.
 	"switch e := err.(type) {"
-	We call Unmarshall and we get back that error interface value, we ask
+	We call Unmarshal and we get back that error interface value, we ask
 	if there is a concrete value stored inside of "err" (if err!= nil)
 	If there is, then we do this generic type assertion.
 	"switch e := err.(type) {"
@@ -82,7 +82,7 @@
 
 	case *UnmarshalTypeError:
 			fmt.Printf("UnmarshalTypeError: Value[%s] Type[%v]\n", e.Value, e.Type)
-		case *InvalidUnmarshalError:
+	case *InvalidUnmarshalError:
 			fmt.Printf("InvalidUnmarshalError: Type[%v]\n", e.Type)
 
 	if we type assert, to be an address of "UnmarshalTypeError" then we execute logic.
@@ -94,7 +94,7 @@
 
 	There are lot of practical uses of "Type as context" not just for error handling but other things.
 
-	There's potential danger of using "type as conctext" as well.
+	There's potential danger of using "type as context" as well.
 	The whole idea of error handling here was to, maintain the decoupled state using the error interface.
 
 	The more decoupled we can maintain ourselves in terms of error handling the more,

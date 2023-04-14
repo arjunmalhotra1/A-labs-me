@@ -4,7 +4,7 @@
 	types where the type itself is the context even better when we can use the interface type and can make
 	behavior the context.
 	Then we saw the bug where we saw that, we have to make sure that all our functions return the
-	error interface for hte error using the interface value and not the custom error types themselves.
+	error interface for the error using the interface value and not the custom error types themselves.
 
 	Here we will see the design pattern that will really help  minimize the problems in code.
 	That's the idea of handling an error.
@@ -16,12 +16,12 @@
 	we will also have to make sure that the code we are deciding is doing all this, can log an error.
 	When we get into package oriented design we will talk about policies who can and who cannot
 	log. Who can shut down apps and who cannot shut down apps.
-	3. Then we will make the decsion whether can recover or shut down.
+	3. Then we will make the decision whether can recover or shut down.
 
 	There are a lot of inconsistencies in code bases (codes-out there in the world)
 	when it comes to handling an error.
 
-	Dave Trainey wrote his own error package and we will see how to use it.
+	Dave Chaney wrote his own error package and we will see how to use it.
 
 	Here, we have defined a custom error type called "AppError". It has a state field.
 	type AppError struct {
@@ -39,12 +39,12 @@
 	1.png
 	We can imaging that in 1.png is the AppError value which has 99 in it.
 	This is the root error value. this function is obviously is not going to handle the error
-	because this function is producing the error nad is going to return it back up the call stack.
+	because this function is producing the error and is going to return it back up the call stack.
 
 	What happens next?
 	The thirdCall() function as being executed by secondCall() function.
 	Then when we check "err!=nil", the answer is yes. When we called the thirdCall()
-	it didn't bring back the concrete value, it brough it back through the "err" interface.
+	it didn't bring back the concrete value, it brought it back through the "err" interface.
 	So we know since there is a concrete value inside it hence it is "true".
 
 	But now are we going to handle it?
@@ -94,7 +94,7 @@
 	What cause function does is that it allows us to unwind all the wrapping.
 	And get the error value back out.
 	See 6.png
-	So this cause function is giving us back the error value that we started with from the begining.
+	So this cause function is giving us back the error value that we started with from the beginning.
 	This then let's us use all those mechanics, that we saw earlier.
 
 	As we can see here we get the root cause error using the cause function and then we do the type assertion.

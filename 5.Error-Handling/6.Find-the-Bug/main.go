@@ -1,8 +1,8 @@
 /*
-	This code has amistake that people writing code since a long time have made.
+	This code has a mistake that people writing code since a long time have made.
 
 	"if _, err = fail(); err != nil {"
-	We call fail() and ask if there is any concrete value sotred inside of err.
+	We call fail() and ask if there is any concrete value sorted inside of err.
 	At runtime the output is
 	"log.Fatal("Why did this fail?")"
 	which means there is a concrete value stored inside of "err".

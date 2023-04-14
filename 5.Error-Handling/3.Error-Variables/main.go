@@ -24,13 +24,13 @@
 
 	webCall() return the error interface value with or without a concrete piece of data stored inside of it,
 	the error string. Next we check if there is a concrete value stored inside of err with "err != nil"
-	If there is then we are switching. Is the error variaable is based on "ErrBadRequest" or "ErrPageMoved".
+	If there is then we are switching. Is the error variable is based on "ErrBadRequest" or "ErrPageMoved".
 	Then a default case if it's neither of those 2.
 
 	Errors variable has to be the next choice when just knowing if there's an error in there is not enough.
 
 	We don't want to simply just create error variables just for the sake of it.
-	We don't want to be doing anything just for the sake of doing naything. That's just type pollution.
+	We don't want to be doing anything just for the sake of doing anything. That's just type pollution.
 	If error variable is not going to give us any context then we start thinking about the custom error types.
 
 */

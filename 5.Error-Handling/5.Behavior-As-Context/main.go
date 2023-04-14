@@ -2,13 +2,13 @@
 	What happens when we are in this context sinuation and you don't want to be,
 	We have got to use custom error types, but we want to maintain the level of decoupling.
 
-	This is where we will have to focus from type as ontext to behavior as context.
+	This is where we will have to focus from type as context to behavior as context.
 
 	Our context will move from type to behavior. From "what is" to "what does".
 
 	"line, err := c.reader.ReadString('\n')"
 	reader is an interface and will have a concrete value inside of it.
-	In this case we will be reading a string may be over a newtwork.
+	In this case we will be reading a string may be over a network.
 
 	Here we are blocking until one of the 2 things happen.
 	1. either we that string, until the "\n(new line" is encountered.
@@ -18,7 +18,7 @@
 	Notice here "switch e := err.(type) {" we are still doing type as context.
 	What we are saying is let's perform the type assertion on "err".
 	And if the concrete value, stored inside of "err" is a pointer to the "OpError", then
-	we execute that logic. If it's an address of "AddrError" then we eecute that case.
+	we execute that logic. If it's an address of "AddrError" then we execute that case.
 	Since the dns package has a lots of different error types.
 	"OpError" is the most common error type that we will use in Go.
 	then he showed the implementation of the "OpError" type from the standard library.
@@ -27,7 +27,7 @@
 	Note OpError type is an exported type, all the fields are exported.
 
 	This is where the error interface is implemented - https://cs.opensource.google/go/go/+/refs/tags/go1.17.5:src/net/net.go;l=464
-	Note the pointer symantic implementation.
+	Note the pointer symantec implementation.
 
 	In our below code what we are doing in this switch case.
 	In every case we care about calling a method, called "temporary".
@@ -43,7 +43,7 @@
 	When we look at the "Temporary()" implementation for OpError,
 	https://cs.opensource.google/go/go/+/refs/tags/go1.17.5:src/net/net.go;l=515
 
-	Mostly in every single case we are tyring to just validate if the error was temporary or not.
+	Mostly in every single case we are trying to just validate if the error was temporary or not.
 	It's that behavior that we care about, not necessarily the fact that the error is of one
 	particular concrete type or another.
 
@@ -54,7 +54,7 @@
 		Temporary() bool
 	}
 
-	Notice that the "temporary interface is an Unexported type."
+	Notice that the "temporary interface is an Un-exported type."
 
 	Question. Do we as users of the net package have to implement the temporary interface?
 	Answer. No, since temporary interface is only inside the net package there are multiple implementations
@@ -64,10 +64,9 @@
 	do our own type assertions.
 
 	Thinking about it, when we talk about behavior's context what we are saying is we don't care if the error
-	is OP, Add, or DNS. What we care about is the error value has a temporary value that's what we want to
-	work with.
+	is OP, Add, or DNS. What we care about is the error value has a temporary method that's what we want to work with.
 
-	So now, we can get rud of the code in "TypeAsContext()"
+	So now, we can get rid of the code in "TypeAsContext()"
 	We can define our own interface,
 
 	type temporary interface {

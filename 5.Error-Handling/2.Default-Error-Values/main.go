@@ -4,7 +4,7 @@
 	It's about the user having enough context, to understand whether their app is still in the level of
 	integrity or not, so that they can make decision about to either correct it or shut down.
 
-	 Systems cannot be developed assuming tat human beings will be able to write millions of lines of code
+	 Systems cannot be developed assuming that human beings will be able to write millions of lines of code
 	 without making mistakes, and debugging alone is not an efficient way to develop reliable systems.
 		-Al Aho (inventor of AWS)
 
@@ -47,7 +47,7 @@ type error interface {
 	He is right, they are just values and that error values are decoupled form the interface.
 
 	In a lifetime of code the errors will change quite a bit and by working with errors in a decoupled
-	state, it gives us the ability to change and improve error handling without crating cascading affects
+	state, it gives us the ability to change and improve error handling without creating cascading affects
 	throughout our code base.
 	"errorString" is most commonly used error type in go.
 	Notice - "errorString" is unexported and also has a field that is unexported too.
@@ -76,7 +76,7 @@ func (e *errorString) Error() string {
 }
 
 /*
-	If we peak a little deeper in the error package we will see a factory function "New()"
+	If we peek a little deeper in the error package we will see a factory function "New()"
 	Note that "New()" returns an error interface value.
 	Bill said earlier that the factory functions should be returning the concrete data,
 	but when we are working with error handling we are always going to be working with the
@@ -142,7 +142,7 @@ func (e *errorString) Error() string {
 	}
 
 	Since every if has it's won scope we can re use the "err" variable name.
-	One more thing about this error handling is that we can mantain a happy path, by just keeping this line of
+	One more thing about this error handling is that we can maintain a happy path, by just keeping this line of
 	sight. See 3.png
 
 	We can keep the if statements tied to the error handlings like this. If there is an error we handle it and then
@@ -154,7 +154,7 @@ func (e *errorString) Error() string {
 	Here bug point is that we are asking if there is a concrete error value stored inside the error interface
 	if there eis then we have an error.
 	Remember error handling is all about context, in this case our context is simply the fact that
-	there is an error inside the error interface that is enough for us to make a decideion.
+	there is an error inside the error interface that is enough for us to make a decision.
 	Because this function only returns one type of error that is the error string "Bad Request"
 
 */
