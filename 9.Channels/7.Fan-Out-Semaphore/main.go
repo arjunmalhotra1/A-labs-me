@@ -13,7 +13,7 @@
 	failed we would want to roll back the entire transaction.
 	We launch 2000 go routines to do individual inserts and if any of those inserts fail we roll them back.
 	It would be horrible if the very first go routine that executes fails we would still have to do the other
-	1,999 inserts before we can roll it back. (Didn't really understand this)
+	1,999 inserts before we can roll it back. (Didn't really understand this) And hence with the 8 go routines if one fails then we have to revert only 8 and not 1999.
 
 	Fan out semaphore is a practical way of batching a little bit of work at a time so we can check things.
 

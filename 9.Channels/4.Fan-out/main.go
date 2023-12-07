@@ -12,7 +12,7 @@
 	We set the "children" variable to be equal to 2000.
 	We use buffered channel here -
 	"ch := make(chan string, children)"
-	Bufferend channel means that we will not take the guarantee that a signal being sent has been received.
+	Buffered channel means that we will not take the guarantee that a signal being sent has been received.
 	We are moving the guarantee away from the signalling. The actual signalling mechanics to outside of it.
 
 	So now 2000 go routines are going off and doing the work that they already know how to do.
@@ -46,7 +46,7 @@
 	Imagine we have a webservice running 50,000 go routines at any given time.
 	If we allow those go routines to perform fan out patterns even if there were 20 go routines on the fan out,
 	then we would have 1,000,000 go routines in flight.
-	WE can use fan out patterns for
+	We can use fan out patterns for
 	CLI tools, cron jobs, lambda functions, but when it comes to web services we have to be careful.
 
 

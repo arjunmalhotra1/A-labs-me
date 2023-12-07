@@ -4,7 +4,7 @@
 
 	Say you got order coffee and you want to talk to the server behind the register,
 	but you can't because you have people waiting in front of you, you have to wait for your turn
-	that's synchronization problem. There's some shared state.
+	that's synchronization problem. There's some shared state (resource).
 	In this case the person behind the register can only talk to one person at a time. So you are stuck in line.
 
 	Then when we get to the front of the line we have Orchestration problem now you have to talk,
@@ -13,7 +13,7 @@
 	The worst thing we can do is when we have an orchestration problem but we leverage synchronization
 	primitives.
 	Worst case, if you have a synchronization problem, and we use orchestration primitives like,
-	Channels.
+	Channels are for Orchestration. Mutexes are for synchronization.
 
 	runtime.GOMAXPROCS(1)
 	We are downgrading the number of threads that are available to us to execute Go routines on.
@@ -53,6 +53,7 @@
 		lowercase()
 		wg.Done()
 	}()
+
 
 	Here we are constructing a literal function - a function with no name.
 	We are also making the function call "()". Then we are using the "go" keyword.

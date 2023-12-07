@@ -3,7 +3,7 @@
 	But the real problem with multi threaded software is that we have to manage nad control
 	all those different paths of execution.
 
-	Data races occur when we have 2 go routines, where one is doing a read and the other is doing a write.
+	Data races occurs when we have 2 go routines, where one is doing a read and the other is doing a write.
 	We need to have at least one write. They are trying to access the same memory location at the same time.
 
 	This becomes a problem because there is no predictability on what's going to happen.

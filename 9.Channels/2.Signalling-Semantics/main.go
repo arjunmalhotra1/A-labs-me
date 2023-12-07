@@ -1,5 +1,11 @@
 /*
 	We have seen already how to use wait groups to achieve orchestration.
+	My thoughts:
+	xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+	In the previous example when we used wait groups, the go routine was kind of like telling the main go routine that "Hey! I have completed my work and we can move ahead now."
+	The difference between wait groups and channels is that when using channels the go routines can exchange information or data(signalling with data as mentioned below) with each other as well.
+	xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
 	But one of Go's biggest feature is the channel.
 
 	It is channels that allow us to do orchestration in a much simpler way.
@@ -50,7 +56,7 @@
 	Remember latency is slowing down your program's throughput.
 	To get the guarantees we have to consider that there may be unknown and high latencies.
 
-	While you are waiting on the send side to be abel to perform the send because the receiver has to come along.
+	While you are waiting on the send side to be able to perform the send because the receiver has to come along.
 	Or even on the other side if receiver comes first but we are waiting for the sender.
 	Sender and receive has to come along.
 
@@ -108,10 +114,4 @@
 	We need to know the state of the channel so that we know how it is going to operate and
 	we also want to know do we need to deliver the signal with or without the data.
 
-
-
-
-
-
 */
-

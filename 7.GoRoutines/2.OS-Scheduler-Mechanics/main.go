@@ -115,7 +115,7 @@
 	Say we have 1 millions integers to be added. There's nothing in the process of adding that will cause the threads
 	to wait or pause for anything. This is CPU bound work load.
 
-	This means that every thread wil get it's full time slice (from beginning till the end). So far we have seen CPU bound
+	This means that every thread will get it's full time slice (from beginning till the end). So far we have seen CPU bound
 	work load, where if thread A gets on the hardware thread it got it's full time slice and did not switch
 	until the time slice was over.
 	==================================================================================================================

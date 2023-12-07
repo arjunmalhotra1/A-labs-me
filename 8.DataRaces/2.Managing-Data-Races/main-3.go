@@ -8,7 +8,7 @@
 	In golang there is no one single line of code that is atomic.
 	value++
 	is a read ,modify write operation in itself is 3 lines of assembly code.
-	This is not atomic. At the ardware level any of the 3 lines of code, read, modify or write could have
+	This is not atomic. At the hardware level any of the 3 lines of code, read, modify or write could have
 	the preemptive context switch at any given time.
 
 	If we don't tell the compiler there needs to be synchronization it can take special liberties underneath
@@ -19,7 +19,7 @@
 	This is Synchronization.
 
 	xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-	Next thing is Orchestration, what is the mechanism when we need tow or more go routines to talk
+	Next thing is Orchestration, what is the mechanism when we need two or more go routines to talk
 	to each other. We don't want to be using atomic instructions or mutexes for that.
 	Golang gave us channels to do orchestration.
 

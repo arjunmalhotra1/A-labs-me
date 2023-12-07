@@ -50,10 +50,10 @@
 	For Go routines to ask or get access to the room they will call a function called "lock"
 	and when they leave they call unlock.
 
-	If we have a Go routine that calls lock and doesn't call deadlock then we will end up with a deadlock.
+	If we have a Go routine that calls lock and doesn't call unlock then we will end up with a deadlock.
 	Since the other Go routines will never be allowed in.
 
-	Remember mutexes are not a queue. This is not "First Go routine here will be the fist go routine that gets
+	Remember mutexes are not a queue. This is not "First Go routine here will be the first go routine that gets
 	the access to the code."
 
 	Mutexes use a fair scheduling algorithm.

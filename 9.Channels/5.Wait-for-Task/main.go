@@ -3,7 +3,7 @@
 	But this go routine doesn't know what to do yet.
 	It's going to wait to be told what is the task for it.
 	We will use this in the "pooling" pattern.
-	We have a pool of go routines, we are posting work into the pool adn the go routines are waiting to be told
+	We have a pool of go routines, we are posting work into the pool and the go routines are waiting to be told
 	what task is to be performed.
 	We start with unbuffered channels.
 

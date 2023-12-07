@@ -6,7 +6,7 @@
 	A big mistake people make with pooling is that they use "Buffered" channel.
 	Because if we use buffered channel, once the data is in the buffer we have lost control of it.
 	We always want to maintain the control specially for pooling, we want to know if the go routine has
-	received that work and is not working on it.
+	received that work and is now working on it.
 
 	"// g:= runtime.NumCPU()"
 	g represents the number of go routines that we will be using in our pool.
@@ -64,11 +64,11 @@
 
 	Pooling is complicated because it is hard to find a magic number,
 	and that's why its nice in Go that we can use the fan out patterns, like
-	say in a webservice when one request comes in we just throw a go routine at it because it simplifies
+	say in a web service when one request comes in we just throw a go routine at it because it simplifies
 	our concurrent multi threaded model without necessarily finding the magic numbers.
 	We still get really good performances.
 
-	It's not to say pooling cannot be valueable. If we want to squeeze throughput and if we have
+	It's not to say pooling cannot be valuable. If we want to squeeze throughput and if we have
 	a consistent workload, then a pool might be better.
 	But again it's adding a little more complexity.
 

@@ -13,7 +13,7 @@
  Then we see the line
  "ch := make(chan string)" channel operation.
  Here we use the make call to create the channel of type string.
- We are construcing an unbuffered channel here.
+ We are constructing an un-buffered channel here.
  Here we are making a channel with guarantees that we are going to signal with string data.
  Here we use time.Sleep() But we should never use time.Sleep() in any production level code.
  We are just using it here to simulate the idea of unknown latencies.

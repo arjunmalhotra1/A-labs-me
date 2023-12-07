@@ -3,7 +3,7 @@ This is a situation where we have a discreet amount of work, say 2000 pieces of 
 But we don't want to throw 2000 go routines at the problem we really want to
 control the number of go routines that are going to work.
 So here we will bind/bound the number of go routines that actually get any work done.
-We are not going to create 2000 adn then limit only 8 like we saw with fanout-semaphore pattern.
+We are not going to create 2000 and then limit only 8 like we saw with fanout-semaphore pattern.
 We are really going to end up kind of in this pooling idea but it's not an unlimited pool we know exactly
 how much work needs to get done.
 We are just going to limit the number of go routines to do it.
@@ -29,7 +29,7 @@ Then we make a channel
 "ch := make(chan string, g)"
 This is a buffered channel. The idea is that we will be feeding these 8 go routines, the 2000 pieces of work.
 We can really limit our memory. We don't have to create a buffered channel of 2000.
-What if ther's a million pieces of work that we need to get done. We wouldn't want to create a buffered channel
+What if there's a million pieces of work that we need to get done. We wouldn't want to create a buffered channel
 of a million.
 So what's nice here is that as long as we continue to keep the data flow in the channel it doesn't have to be a
 large channel to feed off of.

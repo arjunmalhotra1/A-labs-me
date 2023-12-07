@@ -94,7 +94,7 @@
 	We are going to issue that Asynchronous system call and you are going to wait here, till the Operating system can
 	complete the read operation.
 
-	We have taken "G" out of "M" and put it in the pool of "M"s which frees up original "M" to do more work.
+	We have taken "G" out of "M" and put it in the pool of "M"s (which are responsible for networking requests) which frees up original "M" to do more work.
 
 	So now the scheduler can now choose another GO routine from the Local Run Queue for that "P",
 	and we can start getting some more work done.
@@ -282,7 +282,7 @@
 	problem that comes into the server at every task, every request and let the scheduler handle it.
 	
 	// I didn't understand this part.
-	This may be the fastest way to solve the problems but is fast enough. Remember we need to balance
+	This may not be the fastest way to solve the problems but is fast enough. Remember we need to balance
 	the performance with the complexity. If it's fast enough, and you have reduced a huge amount of complexity, 
 	that is a big win. If you are looking for pure performance then Go is not for you.
 	You need to start looking at "C", "Assembly language", even "Rust".

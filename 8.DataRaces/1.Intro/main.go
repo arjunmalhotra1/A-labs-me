@@ -1,7 +1,7 @@
 /*
 	DAta races is a really nasty bug in multi threaded software development
-	DAta Races is when we have multiple go rutines trying to access the same memory
+	DAta Races is when we have multiple go routines trying to access the same memory
 	location at the same time and not really cooperating and giving each other a chance.
 
-	Now we will learn about Atomic instructiona dn mutexes. These will prevent us from making obvious data races.
+	Now we will learn about Atomic instruction and mutexes. These will prevent us from making obvious data races.
 */

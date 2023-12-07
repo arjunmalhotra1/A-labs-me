@@ -21,12 +21,12 @@
 	withTimeout function says is pass me an existing context that's in play. Tell me what the duration is and I
 	will give you a new context.
 	Note that context.WithTimeout use value semantics mutation. We pass a context in we get a context out.
-	A lot of the reason for that is because higher level calls should be teling lower level calls,
+	A lot of the reason for that is because higher level calls should be telling lower level calls,
 	how long they want to wait and what they want to do, state changes and a lot fo this has to be local to where
 	we are in the call stack we don't want to affect things above the call stack, everything is local.
 
 	context.Background() is an empty context, it's where we start.
-	So we start with context.Background() and we set a 150 millisecond of duration adn we get a brand new context
+	So we start with context.Background() and we set a 150 millisecond of duration and we get a brand new context
 	and the cancel function.
 	It's critically important that the cancel function is called at least once so, we defer cancel() in our case.
 
@@ -62,7 +62,7 @@
 	We are hoping that the go routine will execute `ch <- "data"` and signal.
 	That is the work got done under 150 ms (context timeout) but in case it doesn't then we are also blocked on
 	signal "case <-ctx.Done():"
-	Immediately when we call the done method the clock starts runing on the 150 milli seconds duration.
+	Immediately when we call the done method the clock starts running on the 150 milli seconds duration.
 	Now the clock is set.
 	Hopefully the go routine signals
 	"ch<-`paper`"
