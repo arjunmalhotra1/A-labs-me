@@ -155,7 +155,7 @@
 	Another efficiency, is when we run Go routines in parallel.
 
 	Say now we have multi threaded Go program. See 19.png
-	We have 2 Ps, 2 OS threads (M) and each OS thread, on it's own Hardware thread,a nd the two go  routines
+	We have 2 Ps, 2 OS threads (M) and each OS thread, on it's own Hardware thread, and the two go  routines
 	G1 and G2 can run in parallel.
 
 	Another interesting thing here when we have got these Ps is that the Go scheduler is also a work
@@ -219,7 +219,7 @@
 
 	xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
-	Now let' switch around ot he Go scheduler, the 30.png is going to remain the same
+	Now let' switch around to the Go scheduler, the 30.png is going to remain the same
 	but we are going to add a couple changes.
 	Replacing Ts with Gs to represent the Go routines, G1 and G2.
 	Also let's have single "P" with a single "M" running on a single hardware thread say Core 1(C1).

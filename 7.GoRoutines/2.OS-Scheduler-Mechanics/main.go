@@ -41,7 +41,7 @@
 	So how can we create this illusion with our scheduler. One idea is that we will define what we call is the
 	"scheduler's period".
 	Scheduler period is defined as our ability to execute any thread, that is in the runnable state
-	at the beginning of this period to get that thread execute withing this time and if we can do that
+	at the beginning of this period to get that thread execute within this time and if we can do that
 	then at least we can create this illusion at least within the scope of the scheduler period that everything is
 	running at the same time.
 
@@ -179,7 +179,7 @@
 	Concurrency means out of order execution
 	Does it matter in what order we add these integers in?
 	Will that affect the final result?
-	Answer. Here we are just adding and it does'nt matter.
+	Answer. Here we are just adding and it doesn't matter.
 
 	So we have a problem in front of us that can be done using concurrency.
 

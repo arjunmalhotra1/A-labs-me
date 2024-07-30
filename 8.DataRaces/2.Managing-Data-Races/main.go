@@ -23,7 +23,7 @@
 	In fact we are going to do it twice. Since we are starting at 0, once both the go routines finish
 	their operation the value should end up as "4".
 
-	When we build this program and run it, everytime we get a value of "4".
+	When we build this program and run it, every time we get a value of "4".
 
 	Now say after few months we have a new developer who now starts logging.
 	like,
@@ -33,11 +33,11 @@
 	Once the developer is comfortable in seeing what the program does, he/she then forgets to pull out the logging.
 
 	When we build and save this program with the logging we get to see 2.png as output.
-	With the logging the output is "2". Everytime we run this program we see the value = "2".
+	With the logging the output is "2". Every time we run this program we see the value = "2".
 
-	All we did was adding logging between those operationa and now, we have a different result.
+	All we did was adding logging between those operations and now, we have a different result.
 	We have a classic data race problem.
-	There were no guarantees in the code before and we were geting luck and now we are no longer getting lucky.
+	There were no guarantees in the code before and we were getting luck and now we are no longer getting lucky.
 
 	Now we read the counter, we did the modification but before we do the write, now what happens is that print
 	statement is allowing the scheduler to make a context switch. See 4.png.
@@ -46,12 +46,12 @@
 	context switch again. See 5.png.
 
 	Now on G1(Go routine 1) we do our write, we read counter and then modify to 2 and now again context switch.
-	And this time G2 has no idea tha the value it has is a dirty value.
+	And this time G2 has no idea that the value it has is a dirty value.
 
 	This is the problem with the data race. This is also a problem with our value semantics.
-	This is when efficiency of pointers kicks in. BEcause we have no concept of that the value is dirty
-	when we come back to G2. G2 writes 1 again adn then reads 1 and increments 1 to 2. The again Context switch.
-	See 6.png
+	This is when efficiency of pointers kicks in. Because we have no concept of that the value is dirty
+	when we come back to G2. G2 writes 1 again and then reads 1 and increments 1 to 2. The again Context switch.
+	See 6.png.
 	Then on G1 it writes 2. We can see that the context switches are causing the values on our multi threaded
 	Go program to now be dirty.
 	We don't have any ability to know that they are dirty.

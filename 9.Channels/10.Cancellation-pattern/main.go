@@ -15,7 +15,7 @@
 	We use the context package to do the cancellation.
 
 	"duration := 150 * time.Millisecond"
-	We are going to perform some operation ad we will only wait 150 milliseconds for it to complete.
+	We are going to perform some operation and we will only wait 150 milliseconds for it to complete.
 
 	"context.WithTimeout(context.Background(), duration)"
 	withTimeout function says is pass me an existing context that's in play. Tell me what the duration is and I

@@ -18,7 +18,7 @@
 	"var counter int32" Then we get no error.
 
 	atomic.AddInt32(&counter,1)
-	The sharing is occuring at the address. So if we call any atomic instruction at that address regardless of
+	The sharing is occurring at the address. So if we call any atomic instruction at that address regardless of
 	if the operation is Add, Load or Store. Then the most goroutines will fall in line and synchronize.
 
 	Now when we build it with

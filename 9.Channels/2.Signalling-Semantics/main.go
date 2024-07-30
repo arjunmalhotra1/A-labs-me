@@ -45,7 +45,7 @@
 
 		Then in the Afternoon Bill comes to get the done work and Jack is not at his desk.
 		Bill is stuck at Jack's desk again Bill waits for Jack to come back from lunch.
-		Then Jack perform his send, and Bill performs his receive adn receive happens before the send.
+		Then Jack perform his send, and Bill performs his receive and receive happens before the send.
 		That's how Jack gets the guarantee.
 
 		Guarantees are critically important they will help us with consistencies.

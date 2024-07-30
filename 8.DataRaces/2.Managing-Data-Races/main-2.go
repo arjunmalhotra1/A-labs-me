@@ -30,8 +30,8 @@
 	xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 	There's also a read write mutex in Golang.
-	REad Write mutex allows us to have multiple readers at the same time.
-	Remember reading is free. REading is not our problem.
+	Read Write mutex allows us to have multiple readers at the same time.
+	Remember reading is free. Reading is not our problem.
 	It's the mutation of memory that's our problem.
 	Remember data race doesn't occur unless there's one go routine performing a write.
 

@@ -52,7 +52,7 @@
 	fmt.Println("parent : sent signal :", w)
 	we know absolutely that there is a go routine int he pool that is doing our work.
 	We also know that we can have at least 8 go routines in this machine running in parallel,
-	before we block on "ch <- `paper`" waiting ot get some work done.
+	before we block on "ch <- `paper`" waiting to get some work done.
 
 	Once all the work has been posted and received we can close the channel
 	close(ch) // signalling without the string data to perform cancellation.
