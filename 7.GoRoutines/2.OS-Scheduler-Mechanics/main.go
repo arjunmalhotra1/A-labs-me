@@ -239,7 +239,8 @@
 	Even if we have too less we will have a problem. We have to find what we call the magic number, the idea is that
 	is there a magic number where, there's only one thread in the runnable state that's what we are looking for.
 
-	We only have one runnable thread in the runnable stage to go.
+	We only have one runnable thread in the runnable stage to go. Then we will have most efficient number of
+	thread for that I/O bound workload.
 
 	================================================================================
 
